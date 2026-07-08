@@ -13,18 +13,4 @@ main { padding: 2rem 5%; min-height: 60vh; }
 
 /* Footer */
 footer { background: #1a2a6c; color: #fff; text-align: center; padding: 1.5rem; position: relative; bottom: 0; width: 100%; }
-/* Styling for your navigation links */
-.nav-link {
-    text-decoration: none;
-    color: #333;
-    padding: 5px 10px;
-    margin: 0 5px;
-    transition: 0.3s;
-}
 
-/* This styles the tab that is currently selected/active */
-.nav-link.active {
-    font-weight: bold;
-    border-bottom: 2px solid #000; /* Adds a nice underline to the active tab */
-    color: #000;
-}
