@@ -11,19 +11,18 @@
 <header>
     <div class="logo">DVYM</div>
     <nav>
-        <a href="index.html">Home</a>
-        <a href="#">About Us</a>
-        <a href="shop.html">Shop</a>
-        <a href="#">Contact</a>
+        <a href="#" class="nav-link active" onclick="loadPage(event, 'home')">Home</a>
+        <a href="#" class="nav-link" onclick="loadPage(event, 'about')">About Us</a>
+        <a href="#" class="nav-link" onclick="loadPage(event, 'shop')">Shop</a>
+        <a href="#" class="nav-link" onclick="loadPage(event, 'contact')">Contact</a>
     </nav>
 </header>
 
-<main>
+<main id="page-content">
     <section class="hero">
         <h1>Dhubulia Vivekananda Yuva Mahamandal</h1>
         <p><em>Guided by the ideology of Akhil Bharat Vivekananda Yuva Mahamandal</em></p>
     </section>
-
     <section class="content">
         <h2>Welcome</h2>
         <p>Dedicated to the service of humanity and the teachings of Swami Vivekananda.</p>
@@ -33,6 +32,53 @@
 <footer>
     <p>&copy; 2026 Dhubulia Vivekananda Yuva Mahamandal. All Rights Reserved.</p>
 </footer>
+
+<script>
+    // 1. Define the data/content for each specific page
+    const pages = {
+        home: `
+            <section class="hero">
+                <h1>Dhubulia Vivekananda Yuva Mahamandal</h1>
+                <p><em>Guided by the ideology of Akhil Bharat Vivekananda Yuva Mahamandal</em></p>
+            </section>
+            <section class="content">
+                <h2>Welcome</h2>
+                <p>Dedicated to the service of humanity and the teachings of Swami Vivekananda.</p>
+            </section>
+        `,
+        about: `
+            <section class="content">
+                <h2>About Us</h2>
+                <p>Dhubulia Vivekananda Yuva Mahamandal is an organization built upon the character-building principles of Swami Vivekananda. We focus on youth development and social service.</p>
+            </section>
+        `,
+        shop: `
+            <section class="content">
+                <h2>Our Shop</h2>
+                <p>Browse our collection of books, photographs, and literature inspired by Ramakrishna-Vivekananda ideology. (Products coming soon!)</p>
+            </section>
+        `,
+        contact: `
+            <section class="content">
+                <h2>Contact Us</h2>
+                <p>Have questions? Reach out to us at dhubulia.vym@email.com or visit our center.</p>
+            </section>
+        `
+    };
+
+    // 2. Function that swaps out the page content smoothly
+    function loadPage(event, pageName) {
+        event.preventDefault(); // Prevents the browser from reloading the page
+        
+        // Update the main content area with the specific page data
+        document.getElementById('page-content').innerHTML = pages[pageName];
+        
+        // Manage navigation visual design (active tab look)
+        const links = document.querySelectorAll('.nav-link');
+        links.forEach(link => link.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+    }
+</script>
 
 </body>
 </html>
