@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .form-container {
+            width: 100%;
+            max-width: 550px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+        }
+        .form-header { margin-bottom: 25px; text-align: center; }
+        .form-header h2 { font-size: 24px; color: #1e293b; font-weight: 600; margin-bottom: 8px; }
+        .form-header p { font-size: 14px; color: #64748b; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 14px; font-weight: 500; color: #475569; margin-bottom: 6px; }
+        .form-group label .required { color: #ef4444; margin-left: 2px; }
+        .form-control {
+            width: 100%; padding: 12px 14px; font-size: 15px; border: 1px solid #cbd5e1;
+            border-radius: 8px; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-control:focus { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); }
+        textarea.form-control { resize: vertical; min-height: 120px; }
+        .btn-submit {
+            width: 100%; padding: 14px; font-size: 16px; font-weight: 600; color: #ffffff;
+            background-color: #4f46e5; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s;
+        }
+        .btn-submit:hover { background-color: #4338ca; }
+        
+        /* Lightbox Popup styles */
+        .popup-overlay {
+            display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); justify-content: center; align-items: center;
+        }
+        .popup-box { background: #ffffff; padding: 30px; border-radius: 12px; text-align: center; max-width: 400px; width: 90%; }
+        .popup-overlay.active { display: flex; }
+        .popup-icon { font-size: 48px; color: #10b981; margin-bottom: 15px; }
+        .btn-close { padding: 10px 24px; background-color: #1e293b; color: white; border: none; border-radius: 6px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <div class="form-header">
+            <h2>Contact Us</h2>
+            <p>Please fill out the form below to get in touch with us.</p>
+        </div>
+
+        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="5b68724a-0f98-4e40-a160-9ad51268909f">
+            
+            <div class="form-group">
+                <label for="name">Full Name <span class="required">*</span></label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="John Doe" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mobile">Mobile Number</label>
+                <input type="tel" id="mobile" name="mobile" class="form-control" placeholder="+91 9876543210">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address <span class="required">*</span></label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="example@domain.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="comments">Comments / Message <span class="required">*</span></label>
+                <textarea id="comments" name="comments" class="form-control" placeholder="Write your message here..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Submit Form</button>
+        </form>
+    </div>
+
+    <div id="successPopup" class="popup-overlay">
+        <div class="popup-box">
+            <div class="popup-icon">✓</div>
+            <h3 style="margin-bottom:10px; color:#1e293b;">Contact Form Submitted</h3>
+            <p style="font-size:14px; color:#64748b; margin-bottom:20px;">Thank you for reaching out! An admin will contact you soon.</p>
+            <button class="btn-close" onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('contactForm');
+        const popup = document.getElementById('successPopup');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                body: formData
+            }).then(response => {
+                if (response.ok) {
+                    popup.classList.add('active');
+                    form.reset();
+                } else {
+                    alert("Submission failed. Please verify your email Access Key configuration.");
+                }
+            }).catch(() => alert("Network error. Please try again."));
+        });
+
+        function closePopup() {
+            popup.classList.remove('active');
+        }
+    </script>
+
+</body>
+</html>
