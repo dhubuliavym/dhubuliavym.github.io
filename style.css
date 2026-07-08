@@ -1,1 +1,15 @@
+body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; }
 
+/* Header - Navy Blue */
+header { background: #1a2a6c; color: #fff; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; }
+header nav a { color: #fff; margin-left: 20px; text-decoration: none; font-weight: bold; }
+
+/* Hero Section - Saffron/Orange Theme */
+.hero { background: #ff9933; color: white; padding: 4rem 5%; text-align: center; }
+
+/* General Layout */
+main { padding: 2rem 5%; min-height: 60vh; }
+.content { max-width: 900px; margin: auto; }
+
+/* Footer */
+footer { background: #1a2a6c; color: #fff; text-align: center; padding: 1.5rem; position: relative; bottom: 0; width: 100%; }
