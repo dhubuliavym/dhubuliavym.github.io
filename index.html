@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dhubulia VYM | Youth Empowerment & Character Building</title>
-    <style>
-        /* ===== GLOBAL STYLES ===== */
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap');
+    <title>Dhubulia VYM | ধুবুলিয়া বিবেকানন্দ যুব মহামণ্ডল</title>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <style>
+        /* ===== CORE VARIABLES & TYPOGRAPHY ===== */
         :root {
-            --primary: #0F172A; /* Deep Navy */
-            --accent: #D35400; /* Deep Orange */
-            --text-dark: #334155;
-            --text-light: #94A3B8;
-            --bg-light: #F8FAFC;
+            --primary: #0F172A;      /* Deep Navy */
+            --primary-light: #1E293B;
+            --accent: #D35400;       /* Deep Orange */
+            --accent-hover: #E67E22;
+            --bg-main: #F8FAFC;
             --white: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-light: #64748B;
         }
 
         * {
@@ -24,68 +29,97 @@
             scroll-behavior: smooth;
         }
 
+        /* Default English Font: Times New Roman */
         body {
-            font-family: 'Open Sans', sans-serif;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: var(--bg-main);
             color: var(--text-dark);
-            background-color: var(--bg-light);
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
+        /* Strict Bengali Font Class */
+        .bn {
+            font-family: 'Noto Serif Bengali', serif !important;
+            line-height: 1.8;
         }
+
+        /* ===== TOP BAR (IST CLOCK) ===== */
+        .top-bar {
+            background: var(--accent);
+            color: var(--white);
+            padding: 6px 20px;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            letter-spacing: 1px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1001;
+        }
+        .top-bar i { margin-right: 8px; }
 
         /* ===== NAVIGATION ===== */
         nav {
             position: fixed;
-            top: 0;
+            top: 30px; /* Below top bar */
             width: 100%;
-            background: var(--primary);
-            padding: 15px 50px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 12px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: 0.3s;
         }
-
-        .logo {
-            color: var(--white);
-            font-size: 24px;
-            font-weight: 800;
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
             text-decoration: none;
-            letter-spacing: 1px;
         }
 
-        .logo span {
-            color: var(--accent);
+        .logo-img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255,255,255,0.2);
+            object-fit: cover;
+            background: white;
         }
+
+        .logo-text {
+            color: var(--white);
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .logo-text span { color: var(--accent); }
 
         .nav-links {
             list-style: none;
             display: flex;
-            gap: 30px;
+            gap: 25px;
         }
-
         .nav-links a {
             color: var(--white);
             text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            text-transform: uppercase;
+            font-size: 16px;
+            font-weight: bold;
             transition: 0.3s;
         }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
+        .nav-links a:hover { color: var(--accent); }
 
         /* ===== HERO SECTION ===== */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover;
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.7)), 
+                        url('https://upload.wikimedia.org/wikipedia/commons/0/0b/Swami_Vivekananda-1893-09-signed.jpg') center/cover fixed;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -93,397 +127,579 @@
             text-align: center;
             padding: 0 20px;
             color: var(--white);
+            margin-top: 30px;
+        }
+
+        .vym-badge {
+            background: var(--accent);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease forwards;
         }
 
         .hero h1 {
-            font-size: 50px;
-            margin-bottom: 20px;
+            font-size: 42px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
             animation: slideDown 1s ease forwards;
-            opacity: 0;
         }
 
-        .hero p {
+        .hero h2 {
             font-size: 20px;
-            max-width: 600px;
-            margin-bottom: 30px;
-            font-style: italic;
-            animation: fadeIn 1.5s ease forwards 0.5s;
-            opacity: 0;
+            color: #F8FAFC;
+            font-weight: normal;
+            margin-bottom: 20px;
+            opacity: 0.9;
         }
 
-        .btn-primary {
-            padding: 15px 40px;
-            background: var(--accent);
-            color: var(--white);
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 700;
-            font-family: 'Montserrat', sans-serif;
-            transition: 0.3s;
-            animation: slideUp 1s ease forwards 1s;
-            opacity: 0;
-        }
-
-        .btn-primary:hover {
-            background: var(--white);
+        .motto {
+            font-size: 24px;
             color: var(--accent);
+            font-weight: bold;
+            margin-top: 15px;
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
         }
 
-        /* ===== SECTIONS (General) ===== */
-        section {
-            padding: 100px 10%;
-        }
-
+        /* ===== GENERAL SECTIONS ===== */
+        section { padding: 90px 10%; }
         .section-title {
             text-align: center;
-            font-size: 36px;
+            font-size: 32px;
             color: var(--primary);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            font-weight: bold;
         }
-
-        .section-title span {
-            color: var(--accent);
-        }
-
         .section-divider {
-            width: 80px;
+            width: 70px;
             height: 4px;
             background: var(--accent);
             margin: 0 auto 50px;
             border-radius: 2px;
         }
 
-        /* ===== ABOUT US ===== */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .about-text p {
-            font-size: 16px;
-            margin-bottom: 20px;
-            color: var(--text-dark);
-        }
-
-        .about-img {
-            width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        /* ===== STUDY CIRCLE ===== */
-        #study-circle {
-            background: var(--white);
-        }
-
-        .study-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background: var(--bg-light);
-            padding: 40px 30px;
-            border-radius: 12px;
-            text-align: center;
-            border-bottom: 4px solid transparent;
-            transition: 0.4s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            border-bottom: 4px solid var(--accent);
-        }
-
-        .card h3 {
-            font-size: 20px;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        /* ===== TERMS & CONDITIONS ===== */
-        .terms-box {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .terms-box h4 {
-            color: var(--primary);
-            margin-top: 20px;
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-
-        /* ===== CONTACT ===== */
-        #contact {
-            background: var(--primary);
-            color: var(--white);
-            text-align: center;
-        }
-
-        #contact .section-title {
-            color: var(--white);
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-
-        .contact-item {
-            background: rgba(255,255,255,0.05);
-            padding: 30px;
-            border-radius: 12px;
-            width: 250px;
-        }
-
-        .contact-item h3 {
-            color: var(--accent);
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            background: #080D1A;
-            text-align: center;
-            padding: 20px;
-            color: var(--text-light);
-            font-size: 14px;
-        }
-
-        /* ===== 20 SECOND POPUP MODAL ===== */
-        .promo-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 23, 42, 0.8);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .promo-box {
+        /* ===== CARDS (Study Circle, Terms, Message) ===== */
+        .vym-card {
             background: var(--white);
             padding: 40px;
             border-radius: 16px;
-            max-width: 450px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-            position: relative;
-            transform: scale(0.8);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border-top: 6px solid var(--accent);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+            margin-bottom: 40px;
+            border-top: 5px solid var(--accent);
+            transition: transform 0.3s;
         }
-
-        .promo-box h3 {
-            color: var(--primary);
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-
-        .promo-box p {
-            color: var(--text-dark);
-            margin-bottom: 25px;
-        }
-
-        .btn-visit {
-            display: inline-block;
-            background: var(--accent);
-            color: var(--white);
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-
-        .btn-visit:hover {
-            background: var(--primary);
-        }
-
-        .close-promo {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--text-light);
-            transition: 0.3s;
+        .vym-card:hover { transform: translateY(-5px); }
+        .vym-card h3 { color: var(--primary); font-size: 22px; margin-bottom: 20px; border-bottom: 1px solid #E2E8F0; padding-bottom: 10px; }
+        
+        .contact-box {
+            background: var(--bg-main);
+            padding: 15px 20px;
+            border-left: 4px solid var(--primary);
+            border-radius: 4px;
+            margin: 15px 0;
         }
         
-        .close-promo:hover { color: var(--primary); }
+        .study-books ul, .tc-list { list-style: none; padding-left: 0; }
+        .study-books li { padding: 8px 0; border-bottom: 1px dashed #CBD5E1; }
+        .study-books li::before { content: "📚"; margin-right: 10px; }
 
-        /* ===== ANIMATIONS & UTILS ===== */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .tc-list li { margin-bottom: 15px; display: flex; align-items: flex-start; }
+        .tc-list .num { font-weight: bold; color: var(--accent); margin-right: 10px; min-width: 25px; }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
+        /* ===== DONATE / PAYMENT ===== */
+        .payment-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 50px;
+            border-radius: 16px;
+            flex-wrap: wrap;
         }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        .qr-code {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .qr-code img { width: 180px; height: 180px; }
+        .pay-btn {
+            background: var(--accent);
+            color: var(--white);
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(211,84,0,0.3);
+        }
+        .pay-btn:hover { background: var(--white); color: var(--accent); }
+
+        /* ===== CONTACT & FORM ===== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #CBD5E1;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 16px;
+        }
+        .btn-submit {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+        .btn-submit:hover { background: var(--accent); }
+
+        /* Admin Contact Cards */
+        .admin-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .admin-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--white);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #E2E8F0;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: 0.3s;
+        }
+        .admin-card:hover { border-color: var(--accent); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .admin-card i { font-size: 24px; color: var(--accent); }
+
+        /* ===== FOOTER & SOCIALS ===== */
+        footer {
+            background: #080D1A;
+            padding: 40px 20px 20px;
+            text-align: center;
+            color: var(--text-light);
+        }
+        .social-icons {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .social-icons a {
+            color: var(--white);
+            background: rgba(255,255,255,0.1);
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 20px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .social-icons a:hover { background: var(--accent); transform: translateY(-3px); }
+
+        /* ===== FLOATING WIDGETS ===== */
+        /* WhatsApp Floating */
+        .float-wa {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            text-decoration: none;
+            transition: 0.3s;
+            animation: pulseWA 2s infinite;
+        }
+        .float-wa:hover { transform: scale(1.1); }
+        
+        @keyframes pulseWA {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
-        /* ===== MOBILE RESPONSIVENESS ===== */
+        /* Constant Animated Blog Tag */
+        .float-blog {
+            position: fixed;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, var(--accent), #E67E22);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 20px 0 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: -5px 5px 20px rgba(0,0,0,0.2);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+            animation: slideBounce 3s infinite;
+        }
+        .float-blog:hover { width: auto; background: var(--primary); }
+        @keyframes slideBounce {
+            0%, 100% { transform: translate(0, -50%); }
+            50% { transform: translate(-10px, -50%); }
+        }
+
+        /* ===== 60 SECOND PREMIUM POPUP ===== */
+        .premium-popup-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.85); z-index: 9999; justify-content: center; align-items: center;
+            backdrop-filter: blur(8px); opacity: 0; transition: opacity 0.4s ease;
+        }
+        .premium-popup-box {
+            background: var(--white); width: 90%; max-width: 450px; border-radius: 24px; text-align: center;
+            position: relative; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.3), 0 0 40px rgba(211, 84, 0, 0.2);
+            opacity: 0; transform: translateY(50px) scale(0.9); transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        .premium-popup-overlay.show-popup { display: flex; opacity: 1; }
+        .premium-popup-overlay.show-popup .premium-popup-box { opacity: 1; transform: translateY(0) scale(1); }
+        
+        .popup-header { background: linear-gradient(135deg, var(--primary), var(--primary-light)); padding: 30px; }
+        .popup-icon { font-size: 50px; display: inline-block; animation: floatIcon 3s ease-in-out infinite; }
+        .popup-body { padding: 30px; }
+        .popup-body h3 { color: var(--primary); font-size: 24px; margin-bottom: 10px; }
+        .popup-close-btn {
+            position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.2); border: none;
+            color: white; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; transition: 0.3s; font-size: 20px;
+        }
+        .popup-close-btn:hover { background: var(--accent); }
+
+        @keyframes floatIcon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        
+        /* SCROLL REVEAL */
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            nav { padding: 15px 20px; flex-direction: column; gap: 15px; }
-            .hero h1 { font-size: 36px; }
-            .about-grid { grid-template-columns: 1fr; }
-            section { padding: 80px 5%; }
+            nav { padding: 10px 15px; flex-direction: column; gap: 10px; }
+            .hero h1 { font-size: 32px; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .admin-cards { grid-template-columns: 1fr; }
+            .payment-box { flex-direction: column; text-align: center; }
+            .float-blog { padding: 10px; font-size: 12px; }
+            .float-wa { width: 50px; height: 50px; font-size: 28px; bottom: 20px; left: 20px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- IST CLOCK TOP BAR -->
+    <div class="top-bar">
+        <i class="fa-regular fa-clock"></i> 
+        <span class="en">IST: </span> <span id="ist-clock">Loading...</span>
+    </div>
+
+    <!-- CONSTANT FLOATING BLOG BUTTON -->
+    <a href="https://dhubuliavym.blogspot.com" target="_blank" class="float-blog">
+        <i class="fa-solid fa-globe"></i> <span class="en">Visit Official Site</span>
+    </a>
+
+    <!-- FLOATING WHATSAPP -->
+    <a href="https://wa.me/917872295230" target="_blank" class="float-wa">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- NAVIGATION -->
     <nav>
-        <a href="#home" class="logo">Dhubulia <span>VYM</span></a>
+        <a href="#home" class="logo-container">
+            <img src="https://i.ibb.co/RGnjctz3/310393.jpg" alt="VYM Logo" class="logo-img">
+            <div class="logo-text">
+                <span class="bn">Dhubulia</span> <span>Vivekananda Yuva Mahamandal</span>
+            </div>
+        </a>
         <ul class="nav-links">
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#study-circle">Study Circle</a></li>
-            <li><a href="#terms">T&C</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#editor-msg" class="en">About</a></li>
+            <li><a href="#study-circle" class="en">Study Circle</a></li>
+            <li><a href="#terms" class="en">T&C</a></li>
+            <li><a href="#donate" class="en">Donate</a></li>
+            <li><a href="#contact" class="en">Contact</a></li>
         </ul>
     </nav>
 
+    <!-- HERO SECTION -->
     <header id="home" class="hero">
-        <h1>"Arise, Awake, and Stop Not"</h1>
-        <p>Empowering the youth through education, character building, and selfless service.</p>
-        <a href="#about" class="btn-primary">Discover Our Mission</a>
+        <span class="vym-badge en">ESTD. 2009</span>
+        <h1 class="bn">ধুবুলিয়া বিবেকানন্দ যুব মহামণ্ডল</h1>
+        <h2 class="en">Dhubulia Vivekananda Yuva Mahamandal</h2>
+        
+        <p class="bn" style="font-size: 18px; opacity: 0.9;">(অখিল ভারত বিবেকানন্দ যুব মহামণ্ডলের ভাবাদর্শে পরিচালিত)</p>
+        <p class="en" style="font-size: 16px; font-style: italic; opacity: 0.8; margin-bottom: 20px;">
+            Guided by the ideology of Akhil Bharat Vivekananda Yuva Mahamandal
+        </p>
+
+        <p class="motto bn">“নিজেকে গড়ো • সমাজকে গড়ো • দেশকে গড়ো”</p>
     </header>
 
-    <section id="about">
-        <h2 class="section-title">About <span>Us</span></h2>
-        <div class="section-divider"></div>
-        <div class="about-grid">
-            <div class="about-text reveal">
-                <p>Welcome to Dhubulia Vivekananda Yuva Mahamandal (VYM). We are a dedicated youth organization striving to implement the man-making and character-building ideas of Swami Vivekananda.</p>
-                <p>Our core philosophy revolves around the holistic development of young minds. We believe that proper guidance, structured learning, and dedication to societal welfare can transform individuals and, by extension, the nation.</p>
-            </div>
-            <div class="reveal">
-                <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Education and Youth" class="about-img">
+    <!-- EDITOR MESSAGE -->
+    <section id="editor-msg">
+        <div class="vym-card reveal">
+            <h3 class="bn">সম্পাদকের বার্তা <span class="en" style="font-size:16px; color:#64748B;">/ Editor's Message</span></h3>
+            <p class="bn"><strong>শ্রদ্ধেয় দাদা ও প্রিয় ভাই,</strong></p>
+            <p class="bn">তোমরা নিশ্চয়ই জানো, এই সময়টা (যৌবন) তোমার জীবনের সবচেয়ে গুরুত্বপূর্ণ অধ্যায়—নিজেকে সব দিক থেকে গড়ে তোলার উপযুক্ত সময়। এই বয়সে জীবনের যে ভিত তৈরি হবে, তার ওপর নির্ভর করবে তোমার নিজের এবং দেশের ভবিষ্যৎ। নিজেকে যথার্থ মানুষ হিসেবে গড়ে তোলার জন্য প্রয়োজন নিয়মিত পাঠ, আলোচনা, চরিত্রগঠন ও সেবার আদর্শ।</p>
+            
+            <p class="bn" style="margin-top: 15px;">স্বামী বিবেকানন্দ বিশ্বাস করতেন যে, প্রকৃত শিক্ষা ও সাধনার মাধ্যমে মানুষের অন্তর্নিহিত শক্তির বিকাশ ঘটানোই জীবনের প্রধান লক্ষ্য। আমাদের বিশ্বাস — <strong>"উন্নত ব্যক্তি চরিত্র থেকেই উন্নত সমাজের সৃষ্টি হয়।"</strong></p>
+
+            <div style="margin-top: 30px; border-top: 1px dashed #CBD5E1; padding-top: 15px;" class="bn">
+                <strong>ইতি,</strong><br>
+                <strong>লোকেশ মন্ডল</strong><br>
+                সম্পাদক, ধুবুলিয়া বিবেকানন্দ যুব মহামণ্ডল
             </div>
         </div>
     </section>
 
-    <section id="study-circle">
-        <h2 class="section-title">Study <span>Circle</span></h2>
+    <!-- STUDY CIRCLE -->
+    <section id="study-circle" style="background: var(--white);">
+        <h2 class="section-title en">Study Circles <br><span class="bn" style="font-size: 24px; color: var(--text-dark);">পাঠচক্র</span></h2>
         <div class="section-divider"></div>
-        <div class="study-cards">
-            <div class="card reveal">
-                <h3>Academic Excellence</h3>
-                <p>We provide a collaborative environment for deep learning, from sciences to history, ensuring conceptual clarity and structured preparation for competitive examinations.</p>
+
+        <div class="vym-card reveal">
+            <h3 class="bn">📖 সাপ্তাহিক পাঠচক্র (যুবকদের জন্য)</h3>
+            <p class="bn">প্রতি রবিবার বিভিন্ন গ্রন্থ পাঠ, আলোচনা এবং আদর্শচর্চার মাধ্যমে চারিত্রিক উন্নয়নের উদ্দেশ্যে এই পাঠচক্র অনুষ্ঠিত হয়।</p>
+            <div class="contact-box bn">
+                <p><strong>📍 স্থান:</strong> শ্রী লোকেশ মন্ডলের বাড়ি (নতুনপাড়া, ধুবুলিয়া – ৭৪১১৩৯)</p>
+                <p><strong>🕕 সময়:</strong> প্রতি রবিবার • সন্ধ্যা ৬টা – ৮টা</p>
             </div>
-            <div class="card reveal">
-                <h3>Character Building</h3>
-                <p>Education is incomplete without values. Our study circles actively discuss the teachings of great thinkers to build moral fortitude and intellectual honesty.</p>
+            <div class="study-books bn">
+                <h4>📚 পাঠ্যবস্তু:</h4>
+                <ul>
+                    <li>স্বামী বিবেকানন্দের জীবনী — প্রমথনাথ বসু, স্বামী গম্ভীরানন্দ, স্বামী বিশ্বশ্রয়ানন্দ এবং অন্যান্য লেখক রচিত</li>
+                    <li>অখিল ভারত বিবেকানন্দ যুব মহামণ্ডল প্রকাশিত পুস্তকাবলী — শ্রী নবনীহরণ মুখোপাধ্যায় রচিত</li>
+                    <li>মাসিক পত্রিকা — <b>বিবেক জীবন</b></li>
+                </ul>
             </div>
-            <div class="card reveal">
-                <h3>Peer Support</h3>
-                <p>Learn together, grow together. Our network fosters a healthy competitive spirit while ensuring no student is left behind in their educational journey.</p>
+        </div>
+
+        <div class="vym-card reveal">
+            <h3 class="bn">📘 সাপ্তাহিক কিশোর বিকাশ পাঠচক্র</h3>
+            <p class="bn">কিশোরদের চরিত্রগঠন, শৃঙ্খলা ও আদর্শজীবনের শিক্ষার উদ্দেশ্যে।</p>
+            <div class="contact-box bn">
+                <p><strong>📍 স্থান:</strong> শ্রী গৌরব মন্ডলের বাড়ি</p>
+                <p><strong>🕕 সময়:</strong> প্রতি রবিবার • বিকাল ৩টা – ৪টা</p>
+            </div>
+            <div class="study-books bn">
+                <h4>📚 পাঠ্যবস্তু:</h4>
+                <ul>
+                    <li>স্বামী বিবেকানন্দের জীবনী — স্বামী বিশ্বশ্রয়ানন্দ ও অন্যান্য লেখক রচিত</li>
+                    <li>অখিল ভারত বিবেকানন্দ যুব মহামণ্ডল প্রকাশিত পুস্তকাবলী — শ্রী নবনীহরণ মুখোপাধ্যায় রচিত</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="vym-card reveal">
+            <h3 class="bn">📙 সাপ্তাহিক বিবেক বাহিনী পাঠচক্র</h3>
+            <p class="bn">বিবেক বাহিনীর সদস্যদের জন্য (ছোটো ভাই-বোনদের জন্য) নিয়মিত পাঠ, আলোচনা ও আত্মগঠনমূলক কর্মসূচি।</p>
+            <div class="contact-box bn">
+                <p><strong>📍 স্থান:</strong> শ্রী গৌরব মন্ডলের বাড়ি</p>
+                <p><strong>🕕 সময়:</strong> প্রতি শনিবার • বিকাল ৩:৩০ – ৪:৩০</p>
+            </div>
+            <div class="study-books bn">
+                <h4>📚 পাঠ্যবস্তু:</h4>
+                <ul>
+                    <li>স্বামী বিবেকানন্দের জীবনী — ইন্দ্রদয়াল ভট্টাচার্য ও অন্যান্য লেখক রচিত </li>
+                </ul>
             </div>
         </div>
     </section>
 
+    <!-- TERMS & CONDITIONS -->
     <section id="terms">
-        <h2 class="section-title">Terms & <span>Conditions</span></h2>
+        <h2 class="section-title en">Terms & Conditions <br><span class="bn" style="font-size: 24px; color: var(--text-dark);">শর্তাবলী ও নিয়মাবলী</span></h2>
         <div class="section-divider"></div>
-        <div class="terms-box reveal">
-            <p>Welcome to the official web portal of Dhubulia VYM. By accessing this static portal, you agree to the following terms of use.</p>
-            
-            <h4>1. General Information</h4>
-            <p>All content provided on this static repository (hosted via GitHub Pages) is for informational and educational purposes only.</p>
-            
-            <h4>2. Donations & Contributions</h4>
-            <p>Any financial contributions made through our separate official donation portal are subject to standard verification. E-receipts are generated post-verification by the administrative team.</p>
-            
-            <h4>3. External Links</h4>
-            <p>This site may contain links to external properties (such as our official Blogspot site). We hold no liability for external server uptimes.</p>
-            
-            <h4>4. Modifications</h4>
-            <p>This is a static portal and its structural contents remain fixed as per organizational guidelines. Terms may be updated periodically.</p>
-        </div>
-    </section>
-
-    <section id="contact">
-        <h2 class="section-title">Get in <span>Touch</span></h2>
-        <div class="section-divider" style="background: var(--white);"></div>
-        <p class="reveal">Reach out to us for membership, support, or general inquiries.</p>
         
-        <div class="contact-info">
-            <div class="contact-item reveal">
-                <h3>Email Us</h3>
-                <p>contact@dhubuliavym.org</p>
+        <div class="vym-card reveal bn">
+            <p>আমাদের সংগঠনে আপনাকে স্বাগত। অংশ হওয়ার পূর্বে অনুগ্রহ করে আমাদের মূল শর্তাবলী মনোযোগ সহকারে পড়ে নিন:</p>
+            <ul class="tc-list" style="margin-top:20px;">
+                <li><span class="num">১.</span><p>আমাদের সংগঠন সম্পূর্ণ একটি <strong>অরাজনৈতিক</strong> সংগঠন।</p></li>
+                <li><span class="num">২.</span><p>সংগঠন স্বামীজির <strong>'Be & Make'</strong> (মানুষ হওয়া ও মানুষ গড়া) আদর্শে পরিচালিত।</p></li>
+                <li><span class="num">৩.</span><p>মূল উদ্দেশ্য — ব্যক্তি উন্নতির মাধ্যমে সমাজ ও দেশের উন্নতি।</p></li>
+                <li><span class="num">৪.</span><p>সংগঠনে যোগ দেওয়ার জন্য কোনো রকম টাকা-পয়সা লাগে না (সম্পূর্ণ বিনামূল্যে)।</p></li>
+                <li><span class="num">৫.</span><p>যুবক ও কিশোরদের পাঠচক্রে কেবল <strong>পুরুষরা</strong> অংশগ্রহণ করতে পারে।</p></li>
+                <li><span class="num">৬.</span><p>সদস্যপদ পাওয়ার জন্য নূন্যতম <strong>এক বছর নিয়মিত</strong> সাপ্তাহিক পাঠচক্রে আসতে হবে।</p></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- DONATE SECTION (UPI / QR) -->
+    <section id="donate" style="background: var(--white);">
+        <h2 class="section-title en">Support Our Cause <br><span class="bn" style="font-size: 24px; color: var(--text-dark);">আমাদের পাশে দাঁড়ান</span></h2>
+        <div class="section-divider"></div>
+        
+        <div class="payment-box reveal">
+            <div class="qr-code">
+                <!-- Auto-generated QR via Google API targeting the UPI URI -->
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi%3A%2F%2Fpay%3Fpa%3Ddhubuliavym%40postbank%26pn%3DDhubulia%2520VYM%26cu%3DINR" alt="UPI QR Code">
             </div>
-            <div class="contact-item reveal">
-                <h3>Visit Us</h3>
-                <p>Dhubulia, West Bengal<br>India</p>
-            </div>
-            <div class="contact-item reveal">
-                <h3>Support</h3>
-                <p>UPI: dhubuliavym@postbank</p>
+            <div>
+                <h3 class="en" style="font-size:24px; margin-bottom:10px;">Donate via UPI</h3>
+                <p class="en" style="font-size:16px; opacity:0.9; margin-bottom: 5px;">Scan the QR code or click the button below to pay directly via any UPI app.</p>
+                <p class="en" style="font-family: monospace; font-size: 18px; color: #F59E0B; margin-bottom: 20px;">UPI ID: dhubuliavym@postbank</p>
+                <a href="upi://pay?pa=dhubuliavym@postbank&pn=Dhubulia%20VYM&cu=INR" class="pay-btn en">
+                    <i class="fa-solid fa-mobile-screen"></i> Pay Directly via UPI
+                </a>
             </div>
         </div>
     </section>
 
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+        <h2 class="section-title en">Contact Us <br><span class="bn" style="font-size: 24px; color: var(--text-dark);">যোগাযোগ</span></h2>
+        <div class="section-divider"></div>
+
+        <div class="contact-grid">
+            <!-- Info & Direct Admins -->
+            <div class="reveal">
+                <div class="vym-card" style="margin-bottom:20px; border-top:none;">
+                    <h3 class="en" style="margin-bottom:10px; border:none; font-size:18px;">📍 Address:</h3>
+                    <p class="bn">ধুবুলিয়া ৩/২৫ নং গ্রুপ,<br>পোস্ট ও থানা - ধুবুলিয়া,<br>নদীয়া, পশ্চিমবঙ্গ, পিন - ৭৪১১৩৯</p>
+                </div>
+                
+                <h4 class="bn" style="margin-bottom:15px; color:var(--primary);">সরাসরি যোগাযোগ:</h4>
+                <div class="admin-cards bn">
+                    <a href="tel:+919046742661" class="admin-card">
+                        <i class="fa-solid fa-phone"></i>
+                        <div><strong>শ্যামল বালা</strong><br><small>সভাপতি</small></div>
+                    </a>
+                    <a href="tel:+918001674376" class="admin-card">
+                        <i class="fa-solid fa-phone"></i>
+                        <div><strong>সুবীর চক্রবর্তী</strong><br><small>সহসভাপতি</small></div>
+                    </a>
+                    <a href="tel:+917872295230" class="admin-card">
+                        <i class="fa-solid fa-phone"></i>
+                        <div><strong>লোকেশ মন্ডল</strong><br><small>সম্পাদক</small></div>
+                    </a>
+                    <a href="tel:+918710078175" class="admin-card">
+                        <i class="fa-solid fa-phone"></i>
+                        <div><strong>হরিচাঁদ বিশ্বাস</strong><br><small>সদস্য</small></div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Web3Forms Contact Form -->
+            <div class="vym-card reveal" style="border-top:none;">
+                <h3 class="en">Send a Message</h3>
+                <form action="https://api.web3forms.com/submit" method="POST">
+                    <!-- WEB3FORMS ACCESS KEY -->
+                    <input type="hidden" name="access_key" value="5b68724a-0f98-4e40-a160-9ad51268909f">
+                    <input type="hidden" name="subject" value="New Message from Website">
+                    
+                    <input type="text" name="name" class="form-control en" required placeholder="Full Name *">
+                    <input type="text" name="mobile" class="form-control en" placeholder="Mobile Number">
+                    <input type="email" name="email" class="form-control en" required placeholder="Email Address *">
+                    <textarea name="message" class="form-control en" required placeholder="Write your message..." rows="4"></textarea>
+                    
+                    <button type="submit" class="btn-submit en">Submit Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
-        <p>&copy; 2026 Dhubulia Vivekananda Yuva Mahamandal. All Rights Reserved.</p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/dvym.org" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://x.com/dvym_org" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://www.youtube.com/@dvym_org" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://wa.me/917872295230" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <p class="bn" style="margin-bottom: 5px;">নিজেকে গড়ো • সমাজকে গড়ো • দেশকে গড়ো</p>
+        <p class="en">&copy; 2026 Dhubulia Vivekananda Yuva Mahamandal. All Rights Reserved.</p>
     </footer>
 
-    <div class="promo-overlay" id="promoModal">
-        <div class="promo-box">
-            <button class="close-promo" onclick="closePromo()">×</button>
-            <h3>Discover More!</h3>
-            <p>Want to read our latest updates, articles, and detailed circulars? Visit our official organization blog for comprehensive information.</p>
-            <a href="https://dhubuliavym.blogspot.com" target="_blank" class="btn-visit" onclick="closePromo()">Visit Blogspot Now</a>
+    <!-- ===== 60 SECOND PREMIUM POPUP MODAL ===== -->
+    <div class="premium-popup-overlay" id="promoModal">
+        <div class="premium-popup-box">
+            <button class="popup-close-btn" onclick="closePromo()">×</button>
+            <div class="popup-header">
+                <span class="popup-icon">🕉️</span>
+            </div>
+            <div class="popup-body">
+                <h3 class="bn">বিস্তারিত জানতে চান?</h3>
+                <p class="bn" style="color:var(--text-dark); margin-bottom:20px;">আমাদের যাবতীয় বিজ্ঞপ্তি, প্রবন্ধ এবং বিস্তারিত তথ্যের জন্য আমাদের নিজস্ব ব্লগ সাইটটি পরিদর্শন করুন।</p>
+                
+                <a href="https://dhubuliavym.blogspot.com" target="_blank" class="pay-btn bn" onclick="closePromo()">
+                    অফিসিয়াল ব্লগ দেখুন
+                </a>
+            </div>
         </div>
     </div>
 
+    <!-- ===== JAVASCRIPT ===== -->
     <script>
-        // 1. Smooth Scroll Reveal Animation
+        // 1. IST Live Clock
+        function updateISTClock() {
+            const now = new Date();
+            // Convert to IST (UTC+5:30)
+            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+            const istDate = new Date(utc + (3600000 * 5.5));
+            
+            const timeString = istDate.toLocaleTimeString('en-US', { 
+                hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true 
+            });
+            document.getElementById('ist-clock').textContent = timeString;
+        }
+        setInterval(updateISTClock, 1000);
+        updateISTClock();
+
+        // 2. Scroll Reveal Animations
         function revealElements() {
             var reveals = document.querySelectorAll('.reveal');
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
-                
-                if (elementTop < windowHeight - elementVisible) {
+                if (elementTop < windowHeight - 100) {
                     reveals[i].classList.add('active');
                 }
             }
         }
         window.addEventListener('scroll', revealElements);
-        revealElements(); // Trigger on load
+        revealElements();
 
-        // 2. 20-Second Popup Logic
+        // 3. 60-Second (1 Minute) Premium Popup Logic
         const promoModal = document.getElementById('promoModal');
-        const promoBox = document.querySelector('.promo-box');
-
         setTimeout(() => {
-            promoModal.style.display =
+            promoModal.classList.add('show-popup');
+        }, 60000); // 60,000 ms = 1 minute
+
+        function closePromo() {
+            promoModal.classList.remove('show-popup');
+            setTimeout(() => {
+                promoModal.style.display = 'none';
+            }, 600);
+        }
+    </script>
+</body>
+</html>
