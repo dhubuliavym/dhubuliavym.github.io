@@ -3,82 +3,487 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dhubulia Vivekananda Yuva Mahamandal</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Dhubulia VYM | Youth Empowerment & Character Building</title>
+    <style>
+        /* ===== GLOBAL STYLES ===== */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap');
+
+        :root {
+            --primary: #0F172A; /* Deep Navy */
+            --accent: #D35400; /* Deep Orange */
+            --text-dark: #334155;
+            --text-light: #94A3B8;
+            --bg-light: #F8FAFC;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--primary);
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            color: var(--white);
+            font-size: 24px;
+            font-weight: 800;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            color: var(--white);
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+            animation: slideDown 1s ease forwards;
+            opacity: 0;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 600px;
+            margin-bottom: 30px;
+            font-style: italic;
+            animation: fadeIn 1.5s ease forwards 0.5s;
+            opacity: 0;
+        }
+
+        .btn-primary {
+            padding: 15px 40px;
+            background: var(--accent);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            transition: 0.3s;
+            animation: slideUp 1s ease forwards 1s;
+            opacity: 0;
+        }
+
+        .btn-primary:hover {
+            background: var(--white);
+            color: var(--accent);
+        }
+
+        /* ===== SECTIONS (General) ===== */
+        section {
+            padding: 100px 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .section-title span {
+            color: var(--accent);
+        }
+
+        .section-divider {
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            margin: 0 auto 50px;
+            border-radius: 2px;
+        }
+
+        /* ===== ABOUT US ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .about-img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* ===== STUDY CIRCLE ===== */
+        #study-circle {
+            background: var(--white);
+        }
+
+        .study-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--bg-light);
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            border-bottom: 4px solid transparent;
+            transition: 0.4s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .card h3 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* ===== TERMS & CONDITIONS ===== */
+        .terms-box {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .terms-box h4 {
+            color: var(--primary);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        /* ===== CONTACT ===== */
+        #contact {
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+        }
+
+        #contact .section-title {
+            color: var(--white);
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 12px;
+            width: 250px;
+        }
+
+        .contact-item h3 {
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #080D1A;
+            text-align: center;
+            padding: 20px;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        /* ===== 20 SECOND POPUP MODAL ===== */
+        .promo-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .promo-box {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 16px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-top: 6px solid var(--accent);
+        }
+
+        .promo-box h3 {
+            color: var(--primary);
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .promo-box p {
+            color: var(--text-dark);
+            margin-bottom: 25px;
+        }
+
+        .btn-visit {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn-visit:hover {
+            background: var(--primary);
+        }
+
+        .close-promo {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: 0.3s;
+        }
+        
+        .close-promo:hover { color: var(--primary); }
+
+        /* ===== ANIMATIONS & UTILS ===== */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== MOBILE RESPONSIVENESS ===== */
+        @media (max-width: 768px) {
+            nav { padding: 15px 20px; flex-direction: column; gap: 15px; }
+            .hero h1 { font-size: 36px; }
+            .about-grid { grid-template-columns: 1fr; }
+            section { padding: 80px 5%; }
+        }
+    </style>
 </head>
 <body>
 
-<header>
-    <div class="logo">DVYM</div>
     <nav>
-        <a href="index.html" class="nav-link active" onclick="loadPage(event, 'home')">Home</a>
-        <a href="#" class="nav-link" onclick="loadPage(event, 'about')">About Us</a>
-        <a href="shop.html" class="nav-link" onclick="loadPage(event, 'shop')">Shop</a>
-        <a href="contact.html" class="nav-link" onclick="loadPage(event, 'contact')">Contact</a>
+        <a href="#home" class="logo">Dhubulia <span>VYM</span></a>
+        <ul class="nav-links">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#study-circle">Study Circle</a></li>
+            <li><a href="#terms">T&C</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </nav>
-</header>
 
-<main id="page-content">
-    <section class="hero">
-        <h1>Dhubulia Vivekananda Yuva Mahamandal</h1>
-        <p><em>Guided by the ideology of Akhil Bharat Vivekananda Yuva Mahamandal</em></p>
+    <header id="home" class="hero">
+        <h1>"Arise, Awake, and Stop Not"</h1>
+        <p>Empowering the youth through education, character building, and selfless service.</p>
+        <a href="#about" class="btn-primary">Discover Our Mission</a>
+    </header>
+
+    <section id="about">
+        <h2 class="section-title">About <span>Us</span></h2>
+        <div class="section-divider"></div>
+        <div class="about-grid">
+            <div class="about-text reveal">
+                <p>Welcome to Dhubulia Vivekananda Yuva Mahamandal (VYM). We are a dedicated youth organization striving to implement the man-making and character-building ideas of Swami Vivekananda.</p>
+                <p>Our core philosophy revolves around the holistic development of young minds. We believe that proper guidance, structured learning, and dedication to societal welfare can transform individuals and, by extension, the nation.</p>
+            </div>
+            <div class="reveal">
+                <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Education and Youth" class="about-img">
+            </div>
+        </div>
     </section>
-    <section class="content">
-        <h2>Welcome</h2>
-        <p>Dedicated to the service of humanity and the teachings of Swami Vivekananda.</p>
+
+    <section id="study-circle">
+        <h2 class="section-title">Study <span>Circle</span></h2>
+        <div class="section-divider"></div>
+        <div class="study-cards">
+            <div class="card reveal">
+                <h3>Academic Excellence</h3>
+                <p>We provide a collaborative environment for deep learning, from sciences to history, ensuring conceptual clarity and structured preparation for competitive examinations.</p>
+            </div>
+            <div class="card reveal">
+                <h3>Character Building</h3>
+                <p>Education is incomplete without values. Our study circles actively discuss the teachings of great thinkers to build moral fortitude and intellectual honesty.</p>
+            </div>
+            <div class="card reveal">
+                <h3>Peer Support</h3>
+                <p>Learn together, grow together. Our network fosters a healthy competitive spirit while ensuring no student is left behind in their educational journey.</p>
+            </div>
+        </div>
     </section>
-</main>
 
-<footer>
-    <p>&copy; 2026 Dhubulia Vivekananda Yuva Mahamandal. All Rights Reserved.</p>
-</footer>
+    <section id="terms">
+        <h2 class="section-title">Terms & <span>Conditions</span></h2>
+        <div class="section-divider"></div>
+        <div class="terms-box reveal">
+            <p>Welcome to the official web portal of Dhubulia VYM. By accessing this static portal, you agree to the following terms of use.</p>
+            
+            <h4>1. General Information</h4>
+            <p>All content provided on this static repository (hosted via GitHub Pages) is for informational and educational purposes only.</p>
+            
+            <h4>2. Donations & Contributions</h4>
+            <p>Any financial contributions made through our separate official donation portal are subject to standard verification. E-receipts are generated post-verification by the administrative team.</p>
+            
+            <h4>3. External Links</h4>
+            <p>This site may contain links to external properties (such as our official Blogspot site). We hold no liability for external server uptimes.</p>
+            
+            <h4>4. Modifications</h4>
+            <p>This is a static portal and its structural contents remain fixed as per organizational guidelines. Terms may be updated periodically.</p>
+        </div>
+    </section>
 
-<script>
-    // 1. Define the data/content for each specific page
-    const pages = {
-        home: `
-            <section class="hero">
-                <h1>Dhubulia Vivekananda Yuva Mahamandal</h1>
-                <p><em>Guided by the ideology of Akhil Bharat Vivekananda Yuva Mahamandal</em></p>
-            </section>
-            <section class="content">
-                <h2>Welcome</h2>
-                <p>Dedicated to the service of humanity and the teachings of Swami Vivekananda.</p>
-            </section>
-        `,
-        about: `
-            <section class="content">
-                <h2>About Us</h2>
-                <p>Dhubulia Vivekananda Yuva Mahamandal is an organization built upon the character-building principles of Swami Vivekananda. We focus on youth development and social service.</p>
-            </section>
-        `,
-        shop: `
-            <section class="content">
-                <h2>Our Shop</h2>
-                <p>Browse our collection of books, photographs, and literature inspired by Ramakrishna-Vivekananda ideology. (Products coming soon!)</p>
-            </section>
-        `,
-        contact: `
-            <section class="content">
-                <h2>Contact Us</h2>
-                <p>Have questions? Reach out to us at dhubulia.vym@email.com or visit our center.</p>
-            </section>
-        `
-    };
-
-    // 2. Function that swaps out the page content smoothly
-    function loadPage(event, pageName) {
-        event.preventDefault(); // Prevents the browser from reloading the page
+    <section id="contact">
+        <h2 class="section-title">Get in <span>Touch</span></h2>
+        <div class="section-divider" style="background: var(--white);"></div>
+        <p class="reveal">Reach out to us for membership, support, or general inquiries.</p>
         
-        // Update the main content area with the specific page data
-        document.getElementById('page-content').innerHTML = pages[pageName];
-        
-        // Manage navigation visual design (active tab look)
-        const links = document.querySelectorAll('.nav-link');
-        links.forEach(link => link.classList.remove('active'));
-        event.currentTarget.classList.add('active');
-    }
-</script>
+        <div class="contact-info">
+            <div class="contact-item reveal">
+                <h3>Email Us</h3>
+                <p>contact@dhubuliavym.org</p>
+            </div>
+            <div class="contact-item reveal">
+                <h3>Visit Us</h3>
+                <p>Dhubulia, West Bengal<br>India</p>
+            </div>
+            <div class="contact-item reveal">
+                <h3>Support</h3>
+                <p>UPI: dhubuliavym@postbank</p>
+            </div>
+        </div>
+    </section>
 
-</body>
-</html>
+    <footer>
+        <p>&copy; 2026 Dhubulia Vivekananda Yuva Mahamandal. All Rights Reserved.</p>
+    </footer>
+
+    <div class="promo-overlay" id="promoModal">
+        <div class="promo-box">
+            <button class="close-promo" onclick="closePromo()">×</button>
+            <h3>Discover More!</h3>
+            <p>Want to read our latest updates, articles, and detailed circulars? Visit our official organization blog for comprehensive information.</p>
+            <a href="https://dhubuliavym.blogspot.com" target="_blank" class="btn-visit" onclick="closePromo()">Visit Blogspot Now</a>
+        </div>
+    </div>
+
+    <script>
+        // 1. Smooth Scroll Reveal Animation
+        function revealElements() {
+            var reveals = document.querySelectorAll('.reveal');
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        window.addEventListener('scroll', revealElements);
+        revealElements(); // Trigger on load
+
+        // 2. 20-Second Popup Logic
+        const promoModal = document.getElementById('promoModal');
+        const promoBox = document.querySelector('.promo-box');
+
+        setTimeout(() => {
+            promoModal.style.display =
