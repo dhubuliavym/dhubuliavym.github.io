@@ -116,10 +116,14 @@
         .nav-links a:hover { color: var(--accent); }
 
         /* ===== HERO SECTION ===== */
+        /* ===== HERO SECTION ===== */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.7)), 
-                        url('https://upload.wikimedia.org/wikipedia/commons/0/0b/Swami_Vivekananda-1893-09-signed.jpg') center/cover fixed;
+            background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.7)), 
+                              url('https://upload.wikimedia.org/wikipedia/commons/0/0b/Swami_Vivekananda-1893-09-signed.jpg');
+            background-position: center 15%; /* This brings the image down so the head is visible */
+            background-size: cover;
+            background-attachment: fixed;
             display: flex;
             flex-direction: column;
             justify-content: center;
